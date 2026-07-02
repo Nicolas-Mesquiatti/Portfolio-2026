@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicolás Mesquiatti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="fx grid"></div>
+<canvas id="snake"></canvas>
+<canvas id="stars"></canvas>
+<div class="fx scan"></div>
+<div class="fx vignette"></div>
+<div class="hud"><span class="ap"></span>APPLES&nbsp;<span id="score">00</span></div>
+<div id="snakeBubble">CLICK ME!</div>
+
+<!-- ============================== NAVBAR ============================== -->
+<nav>
+  <div class="nav-links">
+    <a href="#hero" data-text="HOME">HOME</a>
+    <a href="#about" data-text="PROFILE">PROFILE</a>
+    <a href="#projects" data-text="PROJECTS">PROJECTS</a>
+    <a href="#skills" data-text="INVENTORY">INVENTORY</a>
+    <a href="#contact" data-text="CONTACT">CONTACT</a>
+    <button class="snd" id="sndBtn" data-on="false">SND:OFF</button>
+  </div>
+</nav>
+
+<!-- invader vive debajo del nav, se mueve y dispara hacia arriba -->
+<div id="invader-strip">
+  <div id="nav-invader">
+    <svg viewBox="0 0 11 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#9b59b6">
+        <rect x="2" y="0" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/>
+        <rect x="3" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/>
+        <rect x="2" y="2" width="7" height="1"/>
+        <rect x="1" y="3" width="2" height="1"/><rect x="4" y="3" width="3" height="1"/><rect x="8" y="3" width="2" height="1"/>
+        <rect x="0" y="4" width="11" height="1"/>
+        <rect x="0" y="5" width="1" height="1"/><rect x="2" y="5" width="7" height="1"/><rect x="10" y="5" width="1" height="1"/>
+        <rect x="3" y="7" width="2" height="1"/><rect x="6" y="7" width="2" height="1"/>
+      </g>
+    </svg>
+    <div id="nav-bullet"></div>
+  </div>
+</div>
+
+<!-- ============================== HERO ============================== -->
+<header class="hero" id="hero">
+  <div class="wrap">
+    <h1 class="hero-name">NICOLÁS<br><span>MESQUIATTI</span></h1>
+    <div class="hero-sub"><span id="type"></span><span class="cursor-blink"></span></div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn green" data-beep>► START</a>
+      <a href="#about" class="btn cyan" data-beep>◆ PROFILE</a>
+    </div>
+    <div class="scroll-hint"><span class="arr">▼</span> SCROLL TO CONTINUE...</div>
+  </div>
+  <div class="hero-deco">
+    <svg class="invader" width="88" height="64" viewBox="0 0 11 8" shape-rendering="crispEdges">
+      <g fill="#9b59b6">
+        <rect x="2" y="0" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/>
+        <rect x="3" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/>
+        <rect x="2" y="2" width="7" height="1"/>
+        <rect x="1" y="3" width="2" height="1"/><rect x="4" y="3" width="3" height="1"/><rect x="8" y="3" width="2" height="1"/>
+        <rect x="0" y="4" width="11" height="1"/>
+        <rect x="0" y="5" width="1" height="1"/><rect x="2" y="5" width="7" height="1"/><rect x="10" y="5" width="1" height="1"/>
+        <rect x="0" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/>
+        <rect x="3" y="7" width="2" height="1"/><rect x="6" y="7" width="2" height="1"/>
+      </g>
+    </svg>
+    <svg class="invader" width="72" height="64" viewBox="0 0 8 8" shape-rendering="crispEdges">
+      <g fill="#00f5ff">
+        <rect x="3" y="0" width="2" height="1"/>
+        <rect x="2" y="1" width="4" height="1"/>
+        <rect x="1" y="2" width="6" height="1"/>
+        <rect x="0" y="3" width="2" height="1"/><rect x="3" y="3" width="2" height="1"/><rect x="6" y="3" width="2" height="1"/>
+        <rect x="0" y="4" width="8" height="1"/>
+        <rect x="1" y="5" width="1" height="1"/><rect x="3" y="5" width="2" height="1"/><rect x="6" y="5" width="1" height="1"/>
+        <rect x="0" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- ============================== ABOUT ============================== -->
+<section id="about">
+  <div class="wrap reveal">
+    <div class="label">// README.MD</div>
+    <h2 class="section-title">about — Nicolás Mesquiatti</h2>
+    <div class="ficha">
+      <div class="scanzone" id="scanzone" title="Click to scan stack">
+        <div class="stage">
+          <div class="orbit" id="orbit"></div>
+          <div class="avatar-frame idle" id="avatarFrame">
+            <img src="avatar.png" alt="NICO_MSQ" class="avatar-img">
+          </div>
+        </div>
+        <div class="avatar-name">NICO_MSQ</div>
+        <div class="avatar-role">Data Science · Dev</div>
+        <div class="scan-hint" id="scanHint">▶ INSPECT</div>
+      </div>
+      <div class="bio-rows">
+        <div class="bio-line">
+          <span class="k">MODE</span>
+          <span class="v"><b>Dev</b> · <b>Data Science</b> · <b>Automation</b></span>
+        </div>
+        <div class="bio-line">
+          <span class="k">STATUS</span>
+          <span class="v"><b style="color:var(--green)">▶ AVAILABLE</b> — open to freelance projects</span>
+        </div>
+        <div class="bio-line">
+          <span class="k">CLASS</span>
+          <span class="v">Fullstack Developer + <b>Data Scientist</b></span>
+        </div>
+        <div class="bio-line">
+          <span class="k">LEVEL</span>
+          <span class="v"><b>Data Science &amp; AI</b> Technical Degree<br>Instituto Tecnológico Beltrán · Buenos Aires, AR</span>
+        </div>
+        <div class="bio-line">
+          <span class="k">FOCUS</span>
+          <span class="v"><b>Automation &amp; AI</b> — data pipelines, ML integration and workflow automation.</span>
+        </div>
+        <div class="bio-note">// interact with the card</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============================== PROJECTS ============================== -->
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="label">// projects.log</div>
+    <h2 class="section-title">SELECTED WORK</h2>
+    <div id="projWrap"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============================== SKILLS ============================== -->
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="label">// stack.config</div>
+    <h2 class="section-title">TECH STACK</h2>
+    <div class="inv" id="inv"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============================== CONTACT ============================== -->
+<section id="contact">
+  <div class="wrap reveal">
+    <div class="coin-zone">
+      <div class="label">// 1 CREDIT</div>
+      <div class="insert">INSERT COIN<br><span class="blink2">PRESS START TO CONNECT</span></div>
+      <div class="links-row">
+        <a class="btn green" href="https://github.com/Nicolas-Mesquiatti" target="_blank" rel="noopener" data-beep>► GITHUB</a>
+        <a class="btn cyan" href="https://www.linkedin.com/in/nicolas-mesquiatti/" target="_blank" rel="noopener" data-beep>◆ LINKEDIN</a>
+        <a class="btn purple" href="mailto:tu@email.com" data-beep>✦ EMAIL</a>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="fline">© 2026 NICOLÁS MESQUIATTI — ALL RIGHTS RESERVED</div>
+    <div class="fline">NO LIVES REMAINING <span class="heart">♥ ♥ ♥</span></div>
+  </footer>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
