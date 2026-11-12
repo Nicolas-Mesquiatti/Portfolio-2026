@@ -43,6 +43,7 @@ const STACK = [
 
 const PROJECTS = [
   { cat:'auto', title:'AUTOMATION & AI', items:[
+    { repo:'Portfolio-2026', name:'Importaciones automatizadas', desc:'Documentos, datos aduaneros y tracking de contenedores conectados.', tech:'n8n + IA', b:'js', url:'casos/comercio-exterior/', year:'2026' },
     { repo:'postia',  name:'postia',  desc:'AI-powered publication management panel.',    tech:'HTML/JS', b:'js', url:'https://nicolas-mesquiatti.github.io/postia/', year:'2026' },
     { repo:'Futbol',  name:'Futbol',  desc:'Football analysis & prediction with Python.', tech:'Python',  b:'py', wip:true, year:'2026' },
   ]},
