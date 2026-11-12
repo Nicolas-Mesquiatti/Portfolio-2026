@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Caso de trabajo de Nicolás Mesquiatti: automatización de documentos y seguimiento de contenedores para comercio exterior.">
+  <title>Documentos y tracking de importaciones · Nicolás Mesquiatti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="https://nicolas-mesquiatti.github.io/Portfolio-2026/" aria-label="Volver al portfolio de Nicolás Mesquiatti">NM<span class="brand-dot">.</span></a>
+    <span class="topbar-label">CASO / COMERCIO EXTERIOR</span>
+    <a class="topbar-back" href="https://nicolas-mesquiatti.github.io/Portfolio-2026/">← Volver al portfolio</a>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <p class="eyebrow"><span class="tiny-square"></span> CASO DE TRABAJO · 2026 · CLIENTE ANÓNIMO</p>
+      <h1>Del BL a una operación que <em>se actualiza sola.</em></h1>
+      <p class="lead">Tres workflows conectan documentos de importación, una planilla de seguimiento y consultas a navieras. La información entra una vez y se mantiene útil durante el viaje.</p>
+      <div class="hero-meta" aria-label="Resumen del proyecto">
+        <div><small>MI ROL</small><strong>Diseño e implementación</strong></div>
+        <div><small>HERRAMIENTAS</small><strong>n8n · IA · Python · APIs</strong></div>
+        <div><small>ESTADO</small><strong>Implementado</strong></div>
+      </div>
+      <a class="text-link" href="#recorrido">Ver cómo funciona <span aria-hidden="true">↘</span></a>
+    </section>
+
+    <section class="overview" aria-labelledby="problema-title">
+      <div class="wrap overview-grid">
+        <div>
+          <p class="eyebrow">01 / CONTEXTO</p>
+          <h2 id="problema-title">Una operación, demasiadas consultas.</h2>
+        </div>
+        <div class="overview-copy">
+          <p>Para seguir una importación, el equipo debía leer documentos, completar datos en una planilla y volver a entrar a los sitios de las navieras para revisar cada contenedor.</p>
+          <p>Diseñé un circuito que conecta esas tareas: identifica el PDF que llega, extrae los campos necesarios, une el despacho con su BL y revisa periódicamente la fecha de arribo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="flow-section wrap" id="recorrido" aria-labelledby="flow-title">
+      <p class="eyebrow">02 / EL RECORRIDO</p>
+      <h2 id="flow-title">Qué ocurre después de subir un PDF</h2>
+      <div class="flow" role="list">
+        <a href="#bl" role="listitem"><span>01</span> BL <small>Datos del embarque</small></a>
+        <a href="#despacho" role="listitem"><span>02</span> Despacho <small>Datos aduaneros</small></a>
+        <a href="#tracking" role="listitem"><span>03</span> Tracking <small>Buque y ETA</small></a>
+      </div>
+    </section>
+
+    <section class="step wrap" id="bl" aria-labelledby="bl-title">
+      <div class="step-head">
+        <span class="step-num">01 / BL</span>
+        <div>
+          <h2 id="bl-title">El documento inicia la operación.</h2>
+          <p>El equipo deja el BL en una carpeta compartida. El workflow lo lee y registra importador, número de BL, contenedor, forwarder y fecha de embarque cuando está disponible.</p>
+          <div class="definition"><b>BL</b> significa <i>Bill of Lading</i> o conocimiento de embarque: es el documento de transporte de la carga.</div>
+        </div>
+      </div>
+      <figure class="media-block bl-media">
+        <button class="image-button" type="button" data-zoom="assets/bl-ejemplo-ficticio.png" data-caption="BL ficticio usado en la demostración" aria-label="Ampliar BL ficticio">
+          <img src="assets/bl-ejemplo-ficticio.png" alt="Bill of Lading ficticio con número DEMO-2026-0042 y contenedor MSCU1234567" loading="lazy">
+          <span class="zoom-hint">Ampliar ↗</span>
+        </button>
+        <figcaption>Documento ilustrativo. Los nombres y números son ficticios.</figcaption>
+      </figure>
+    </section>
+
+    <section class="step step-alt" id="despacho" aria-labelledby="despacho-title">
+      <div class="wrap">
+        <div class="step-head">
+          <span class="step-num">02 / DESPACHO</span>
+          <div>
+            <h2 id="despacho-title">El número de BL une los documentos.</h2>
+            <p>Cuando llega un despacho, otro workflow obtiene su número de BL y busca ese valor en la planilla. Si encuentra la operación, completa <strong>la misma fila</strong> con número de despacho, fecha de oficialización, valor FOB, divisa, canal y otros datos aduaneros.</p>
+            <div class="definition"><b>La clave:</b> el BL es el dato compartido. La declaración aduanera no confirma por sí sola que la carga ya haya arribado.</div>
+          </div>
+        </div>
+        <figure class="media-block sheet-media">
+          <button class="image-button sheet-image" type="button" data-zoom="assets/fila-bl-despacho-demo.png" data-caption="Una fila con BL, tracking y despacho, todos con datos ficticios" aria-label="Ampliar la fila de ejemplo">
+            <img src="assets/fila-bl-despacho-demo.png" alt="Planilla ficticia: la fila del BL DEMO-2026-0042 se completa con campos aduaneros en azul" loading="lazy">
+            <span class="zoom-hint">Ampliar ↗</span>
+          </button>
+          <figcaption>Una sola fila reúne el BL, el seguimiento y los campos del despacho. Ejemplo ficticio; abrí la imagen para leer las columnas.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="step wrap" id="tracking" aria-labelledby="tracking-title">
+      <div class="step-head">
+        <span class="step-num">03 / TRACKING</span>
+        <div>
+          <h2 id="tracking-title">La fecha de arribo vuelve a consultarse.</h2>
+          <p>Cada lunes y jueves, el actualizador lee los contenedores de la planilla, consulta el servicio de seguimiento y escribe el buque y la ETA revisados. El servicio usa los datos del contenedor y el BL para decidir dónde buscar.</p>
+          <div class="definition"><b>ETA</b> es la fecha estimada de llegada del buque al puerto. Puede cambiar durante el viaje; por eso hace falta revisarla.</div>
+        </div>
+      </div>
+      <div class="comparison" aria-label="Comparación de la planilla antes y después de actualizar">
+        <div class="comparison-toolbar">
+          <div><span class="live-dot"></span> MISMA PLANILLA · DATOS DE DEMOSTRACIÓN</div>
+          <div class="segmented" role="group" aria-label="Estado de la actualización">
+            <button type="button" id="show-before" aria-pressed="true">Antes</button>
+            <button type="button" id="show-after" aria-pressed="false">Después</button>
+          </div>
+        </div>
+        <button class="image-button comparison-image" type="button" id="tracking-zoom" data-zoom="assets/actualizador-antes.png" data-caption="Planilla antes de la actualización programada" aria-label="Ampliar la planilla antes de actualizar">
+          <img id="tracking-image" src="assets/actualizador-antes.png" alt="Planilla ficticia con fechas ETA previas a la actualización" loading="lazy">
+          <span class="zoom-hint">Ampliar ↗</span>
+        </button>
+        <p class="comparison-note" id="comparison-note">Las celdas amarillas muestran los valores anteriores. Seleccioná “Después” para ver los cambios.</p>
+      </div>
+      <figure class="media-block workflow-media">
+        <button class="image-button" type="button" data-zoom="assets/workflow-actualizador.png" data-caption="Captura real del workflow de actualización en n8n" aria-label="Ampliar workflow real del actualizador">
+          <img src="assets/workflow-actualizador.png" alt="Workflow real de n8n: lunes y jueves, leer filas, consultar FastAPI y actualizar ETA y buque" loading="lazy">
+          <span class="zoom-hint">Ampliar ↗</span>
+        </button>
+        <figcaption>Captura real del workflow de actualización en n8n, recortada para ocultar el nombre del cliente.</figcaption>
+      </figure>
+    </section>
+
+    <section class="result" aria-labelledby="result-title">
+      <div class="wrap result-grid">
+        <div>
+          <p class="eyebrow">03 / RESULTADO</p>
+          <h2 id="result-title">La información queda conectada.</h2>
+        </div>
+        <div>
+          <p>Los datos de transporte, los datos aduaneros y el seguimiento se consultan en una misma operación. La revisión programada reemplaza la búsqueda manual de cada contenedor en los portales de las navieras.</p>
+          <p class="result-note">Las imágenes de documentos y planillas son simulaciones con datos ficticios. El workflow mostrado corresponde al sistema implementado. No se publican datos del cliente.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <span>NICOLÁS MESQUIATTI / PORTFOLIO</span>
+    <a href="https://nicolas-mesquiatti.github.io/Portfolio-2026/">Volver a proyectos ↗</a>
+  </footer>
+
+  <dialog id="lightbox" aria-label="Vista ampliada">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen">Cerrar ×</button>
+    <img id="lightbox-image" src="" alt="">
+    <p id="lightbox-caption"></p>
+  </dialog>
+</body>
+</html>
+
